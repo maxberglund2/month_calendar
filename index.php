@@ -51,8 +51,10 @@
             border-radius:5px;
         }
         a:hover {
-            letter-spacing: 0.3em;
             border-radius:10px;
+        }
+        a:hover:nth-child(2) {
+            letter-spacing: 0.3em;
         }
     </style>
 </head>
@@ -79,23 +81,27 @@
         echoTable($currentYear, $currentMonth);
 
          function echoTable($currentYear, $currentMonth) {
+            include "namnsdag.php";
+
+            $emojiArray = ['⛄','❤️','🍀','☂️','🌸','☀️','🍦','✏️','🍎','🎃','🍁','❄️'];
             $fullYear = strtotime($currentYear . '-' . $currentMonth . '-01');
-            $table = "<table><tr><th colspan='3'>" . date('Y M', $fullYear) . "</th></tr>";
+            $table = "<table><tr><th colspan='4'>" . date('Y M', $fullYear) . " " . $emojiArray[date('m', $fullYear)-1] . "</th></tr>";
             for ($x = 0; $x < date('t', $fullYear); $x++) {
                 $eachDay = 1 + $x;
                 $selected_date = strtotime($currentYear . '-' . $currentMonth . '-' . $eachDay);
                 $dayName = date('D', $selected_date);
                 $week = date("W", $selected_date);
+                $dagensNamn = $namnsdag[date('z', $selected_date) +1][0] . " " . $namnsdag[date('z', $selected_date) +1][1];
                 $style = '';
                 $stringTag = '';
 
                 if ($dayName == 'Sun') {
                     $style = 'color: red;';
-                    $stringTag= "<tr><td style='$style'>" . $eachDay . "</td><td style='$style' colspan='2'>" . $dayName . "</td></tr>";
+                    $stringTag= "<tr><td style='$style'>" . $eachDay . "</td><td style='$style' colspan='2'>" . $dayName . "</td><td>" . $dagensNamn . "</td></tr>";
                 } elseif ($dayName == 'Mon') { 
-                    $stringTag= "<tr><td >" . $eachDay . "</td><td width='10'>" . $dayName . "</td><td>" . $week . "w</td></tr>";
+                    $stringTag= "<tr><td >" . $eachDay . "</td><td width='10'>" . $dayName . "</td><td>" . $week . "w</td><td>" . $dagensNamn . "</td></tr>";
                 } else {
-                    $stringTag= "<tr><td width='10'>" . $eachDay . "</td><td colspan=2>" . $dayName . "</td></tr>";
+                    $stringTag= "<tr><td width='10'>" . $eachDay . "</td><td colspan=2>" . $dayName . "</td><td>" . $dagensNamn . "</td></tr>";
                 }
         
                 $table .= $stringTag;
