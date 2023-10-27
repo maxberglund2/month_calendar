@@ -85,7 +85,7 @@
 
             $emojiArray = ['⛄','❤️','🍀','☂️','🌸','☀️','🍦','✏️','🍎','🎃','🍁','❄️'];
             $fullYear = strtotime($currentYear . '-' . $currentMonth . '-01');
-            $table = "<table><tr><th colspan='4'>" . date('Y M', $fullYear) . " " . $emojiArray[date('m', $fullYear)-1] . "</th></tr>";
+            $table = "<table><tr><th colspan='4'>" . date('Y F', $fullYear) . " " . $emojiArray[date('m', $fullYear)-1] . "</th></tr>";
             for ($x = 0; $x < date('t', $fullYear); $x++) {
                 $eachDay = 1 + $x;
                 $selected_date = strtotime($currentYear . '-' . $currentMonth . '-' . $eachDay);
